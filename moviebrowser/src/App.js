@@ -4,7 +4,7 @@ import Navbar from './componets/Navbar';
 import Home from './componets/Home';
 import AboutView from './componets/AboutView';
 import SearchView from './componets/SearchView';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MovieView from './componets/MovieView';
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
         <Route path="/about" Component={AboutView} />
         <Route path="/search" element={<SearchView keyword={searchText} searchResults={searchResults} />} />
         <Route path="/movies/:id" Component={MovieView} />
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </div>
   );

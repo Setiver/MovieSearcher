@@ -1,18 +1,35 @@
+import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Navbar = ({ searchText, setSearchText }) => {
   const navigate = useNavigate();
 
   const updateSearchText = e => {
-    navigate('/search', { replace: true });
+    // navigate('/search');
     setSearchText(e.target.value);
   };
 
+  useEffect(() => {
+    const keyDownHandler = event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+
+        navigate('/search');
+      }
+    };
+
+    document.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [navigate]);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/home">
-          Movie Browser
+          <img src="https://icon-library.com/images/movie-icon-png/movie-icon-png-4.jpg" className="image-on-left" />
         </Link>
         <button
           className="navbar-toggler"
@@ -43,9 +60,10 @@ const Navbar = ({ searchText, setSearchText }) => {
               </Link>
             </li>
           </ul>
+
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchText} onChange={updateSearchText} />
-            <button className="btn btn-outline-success" type="submit">
+            <button className="btn btn-outline-success" onClick={e => navigate('/search')} type="button">
               Search
             </button>
           </form>

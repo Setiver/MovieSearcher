@@ -18,3 +18,20 @@
   background-position: center center;
   opacity: 0.4;
 }
+
+.image-react {
+  width: 30rem;
+}
+
+.navbar {
+  border-bottom: 2px solid #ffffff;
+  font-size: 25px;
+}
+
+.container {
+  text-align: center;
+}
+
+.image-on-left {
+  width: 3rem;
+}
